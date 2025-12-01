@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notification de raisons d'échec FlexRoll{% endblock %}
+
+{% block body %}
+<main class="flex flex-col gap-16 justify-center items-center mt-10">
+    <!-- Title -->
+    <div>
+        <h1 class="text-4xl font-bold">
+            Notification de raisons d'échec FlexRoll
+        </h1>
+        <p class="text-gray-600">Veuillez vous rassurer que les informations renseignées sont correctes.</p>
+    </div>
+
+    <!-- Form -->
+    <form id="notifier-form" class="w-4/5 flex flex-col gap-10">
+        <!-- Merchant Name -->
+        <div class="flex flex-col gap-2">
+            <label for="shortcode">Code marchand</label>
+            <input 
+                type="text" 
+                id="shortcode" 
+                name="shortcode"
+                placeholder="ex: New_lys, Baraka, ..."
+                class="border border-gray-400 bg-white p-2 rounded-md"
+                required
+            />
+        </div>
+
+        <!-- Destinataires et informations générales -->
+        <div class="flex justify-between">
+            <!-- Emails -->
+            <div class="w-1/2 flex flex-col gap-2">
+                <label for="emails">Adresses email de destination</label>
+                <input 
+                    type="text" 
+                    id="emails" 
+                    name="emails"
+                    placeholder="Saisir les emails séparés par des virgules..." 
+                    class="border border-gray-400 bg-white p-2 rounded-md"
+                    required
+                />
+                <div id="email-tags" class="flex gap-3 p-0.5 overflow-x-auto hidden">
+                    <!-- Email tags will be added here dynamically -->
+                </div>
+            </div>
+            
+            <!-- Total -->
+            <div class="w-1/5 flex flex-col gap-2">
+                <label for="total">Total de participants</label>
+                <input 
+                    type="number"
+                    min="1"
+                    placeholder="1" 
+                    id="total"
+                    name="total" 
+                    class="border border-gray-400 bg-white p-2 rounded-md"
+                    required
+                />
+            </div>
+
+            <!-- Date -->
+            <div class="w-1/5 flex flex-col gap-2">
+                <label for="date">Date d'exécution</label>
+                <input 
+                    type="date" 
+                    id="date" 
+                    name="date"
+                    class="border border-gray-400 bg-white p-2 rounded-md"
+                    required
+                />
+            </div>
+        </div>
+
+        <!-- Numéros -->
+        <div class="rounded-lg overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="w-1/3 py-3 px-4 text-left font-medium text-gray-700">Numéro de téléphone</th>
+                        <th class="w-1/3 py-3 px-4 text-left font-medium text-gray-700">Raison d'échec</th>
+                        <th class="w-1/3 py-3 px-4 text-left font-medium text-gray-700"></th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="max-h-80 overflow-y-auto">
+                <table class="w-full">
+                    <tbody id="reason-failures-tbody">
+                        <!-- Existing reason failures will be added here -->
+                        <tr class="border-b border-gray-100" id="new-row-template">
+                            <td class="p-4 w-1/3">
+                                <input 
+                                    type="text"
+                                    id="new-phone"
+                                    placeholder="243810000000"
+                                    class="border border-gray-400 bg-white p-2 rounded-md w-full"
+                                />
+                            </td>
+                            <td class="p-4 w-1/3">
+                                <input 
+                                    type="text"
+                                    id="new-reason"
+                                    placeholder="Raison d'échec"
+                                    class="border border-gray-400 bg-white p-2 rounded-md w-full"
+                                />
+                            </td>
+                            <td class="p-4 w-1/3">
+                                <div 
+                                    class="flex items-center justify-center gap-2 font-bold hover:cursor-pointer text-blue-600 hover:text-blue-800 transition-colors"
+                                    id="add-reason-btn"
+                                >
+                                    <i data-feather="plus"></i>
+                                    <span>Ajouter</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <button 
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md flex items-center justify-center gap-2 transition-colors"
+        >
+            <span>Notifier par mail</span>
+            <i data-feather="send"></i>
+        </button>
+    </form>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg">
+            <div class="flex items-center gap-3">
+                <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+                <span>Envoi en cours...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error messages -->
+    <div id="message-container" class="hidden fixed top-4 right-4 z-50">
+        <div id="message" class="p-4 rounded-md shadow-lg"></div>
+    </div>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/notifier.js"></script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+  "name": "notifier-middleware",
+  "version": "1.0.0",
+  "description": "Symfony notifier middleware with Tailwind CSS",
+  "scripts": {
+    "build-css": "tailwindcss -i ./assets/styles/app.css -o ./public/build/app.css",
+    "watch-css": "tailwindcss -i ./assets/styles/app.css -o ./public/build/app.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
