@@ -1,0 +1,7 @@
+framework:
+    asset_mapper:
+        paths:
+            - assets/
+        excluded_patterns:
+            - '*/tests/*'
+            - '*/node_modules/*'

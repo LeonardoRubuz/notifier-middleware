@@ -1,6 +1,7 @@
 // Notifier FlexRoll - JavaScript functionality
 class NotifierApp {
     constructor() {
+        console.log('NotifierApp constructor called');
         this.emails = [];
         this.reasonFailures = [];
         this.init();
@@ -12,22 +13,33 @@ class NotifierApp {
     }
 
     bindEvents() {
+        console.log('Binding events...');
+        
         // Email input handling
         const emailInput = document.getElementById('emails');
         if (emailInput) {
+            console.log('Email input found, binding event');
             emailInput.addEventListener('input', (e) => this.handleEmailInput(e));
+        } else {
+            console.warn('Email input not found!');
         }
 
         // Add reason failure button
         const addReasonBtn = document.getElementById('add-reason-btn');
         if (addReasonBtn) {
+            console.log('Add reason button found, binding event');
             addReasonBtn.addEventListener('click', () => this.addReasonFailure());
+        } else {
+            console.warn('Add reason button not found!');
         }
 
         // Form submission
         const form = document.getElementById('notifier-form');
         if (form) {
+            console.log('Form found, binding event');
             form.addEventListener('submit', (e) => this.handleSubmit(e));
+        } else {
+            console.warn('Form not found!');
         }
     }
 
@@ -320,5 +332,7 @@ class NotifierApp {
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing NotifierApp...');
     window.notifierApp = new NotifierApp();
+    console.log('NotifierApp initialized:', window.notifierApp);
 });

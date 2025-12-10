@@ -14,4 +14,4 @@
 ###< phpunit/phpunit ###
 
 
-nodes_modules/
+node_modules/

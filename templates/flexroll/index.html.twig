@@ -146,5 +146,6 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="/assets/notifier.js"></script>
+    {{ parent() }}
+    <script src="/assets/notifier.js"></script>
 {% endblock %}
