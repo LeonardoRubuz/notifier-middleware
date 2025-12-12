@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Email
+{% endblock %}
+
+{% block body %}
+	<div class="row mt-4">
+		<div class="col-md-8 mx-auto">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h5 class="mb-0">
+						<i class='bx bx-envelope-open'></i>
+						Créer un nouvel email
+					</h5>
+					<a href="{{ path('app_email_index') }}" class="btn btn-sm btn-secondary">
+						<i class='bx bx-arrow-back'></i>
+						Retour
+					</a>
+				</div>
+				<div class="card-body">
+					{{ form_start(form) }}
+
+					<div class="mb-3">
+						<label for="{{ form.value.vars.id }}" class="form-label">
+							<i class='bx bx-envelope'></i>
+							Adresse Email
+							<span class="text-danger">*</span>
+						</label>
+						{{ form_widget(form.value, {
+							'attr': {
+								'class': 'form-control form-control-lg',
+								'placeholder': 'exemple@domaine.com'
+							}
+						}) }}
+						<div class="form-text">Entrez une adresse email valide et unique</div>
+						{{ form_errors(form.value) }}
+					</div>
+
+					<div class="mb-3">
+						<label for="{{ form.merchant.vars.id }}" class="form-label">
+							<i class='bx bx-store'></i>
+							Marchand
+							<span class="text-muted">(optionnel)</span>
+						</label>
+						{{ form_widget(form.merchant, {
+							'attr': {
+								'class': 'form-select form-select-lg'
+							}
+						}) }}
+						<div class="form-text">Sélectionnez un marchand associé à cet email</div>
+						{{ form_errors(form.merchant) }}
+					</div>
+
+					<div class="mb-3">
+						<div class="form-check form-switch">
+							{{ form_widget(form.enabled, {
+							'attr': {'class': 'form-check-input', 'role': 'switch'}
+						}) }}
+							<label class="form-check-label" for="{{ form.enabled.vars.id }}">
+								<i class='bx bx-check-circle'></i>
+								Email activé
+							</label>
+						</div>
+						<div class="form-text">L'email sera actif et utilisable si cette option est cochée</div>
+						{{ form_errors(form.enabled) }}
+					</div>
+
+					{{ form_rest(form) }}
+					<hr class="my-4">
+
+					<div class="d-flex justify-content-between align-items-center">
+						<a href="{{ path('app_email_index') }}" class="btn btn-outline-secondary">
+							<i class='bx bx-arrow-back'></i>
+							Annuler
+						</a>
+						<button type="submit" class="btn btn-primary btn-lg">
+							<i class='bx bx-save'></i>
+							Enregistrer
+						</button>
+					</div>
+
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

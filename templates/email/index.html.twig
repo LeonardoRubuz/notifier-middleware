@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Emails
+{% endblock %}
+
+{% block body %}
+	<div class="container-xxl">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center bg-navbar-theme">
+				<h5 class="mb-0">
+					<i class='bx bx-envelope'></i>
+					Liste des Emails
+				</h5>
+				<a href="{{ path('app_email_new') }}" class="btn btn-primary">
+					<i class='bx bx-plus'></i>
+					Nouveau
+				</a>
+			</div>
+
+			<div class="card-body">
+				<div class="mb-3">
+					<div class="btn-group" role="group">
+						<a href="{{ path('app_email_index') }}" class="btn btn-sm {{ currentFilter == 'all' ? 'btn-primary' : 'btn-outline-primary' }}">
+							<i class='bx bx-list-ul'></i>
+							Tous
+						</a>
+						<a href="{{ path('app_email_index', {filter: 'enabled'}) }}" class="btn btn-sm {{ currentFilter == 'enabled' ? 'btn-success' : 'btn-outline-success' }}">
+							<i class='bx bx-check-circle'></i>
+							Activés
+						</a>
+						<a href="{{ path('app_email_index', {filter: 'disabled'}) }}" class="btn btn-sm {{ currentFilter == 'disabled' ? 'btn-secondary' : 'btn-outline-secondary' }}">
+							<i class='bx bx-x-circle'></i>
+							Désactivés
+						</a>
+					</div>
+				</div>
+
+				<div class="table-responsive text-nowrap">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Adresse Email</th>
+								<th>Marchand</th>
+								<th>Statut</th>
+								<th>Date de création</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody class="table-border-bottom-0">
+							{% for email in emails %}
+								<tr>
+									<td>
+										<strong>{{ loop.index }}</strong>
+									</td>
+									<td>
+										<i class='bx bx-envelope text-primary'></i>
+										{{ email.value }}
+									</td>
+									<td>
+										{% if email.merchant %}
+											<span class="badge bg-label-primary">{{ email.merchant.shortcode }}</span>
+										{% else %}
+											<span class="text-muted">-</span>
+										{% endif %}
+									</td>
+									<td>
+										{% if email.enabled %}
+											<span class="badge bg-success">Activé</span>
+										{% else %}
+											<span class="badge bg-secondary">Désactivé</span>
+										{% endif %}
+									</td>
+									<td>
+										<small class="text-muted">{{ email.createdAt ? email.createdAt|date('d/m/y H:i') : '' }}</small>
+									</td>
+									<td>
+										<div class="d-flex gap-1">
+											<div class="dropdown">
+												<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+													<i class="bx bx-dots-vertical-rounded"></i>
+												</button>
+												<div class="dropdown-menu">
+													<a href="{{ path('app_email_show', {'id': email.id}) }}" class="dropdown-item">
+														<i class="ti ti-mail me-1"></i>Voir
+													</a>
+													<a href="{{ path('app_email_edit', {'id': email.id}) }}" class="dropdown-item">
+														<i class="ti ti-pencil me-1"></i>
+														Modifier
+													</a>
+													<form method="post" action="{{ path('app_email_delete', {'id': email.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cet Email ?');">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ email.id) }}">
+														<button type="submit" class="dropdown-item text-danger">
+															<i class="ti ti-trash"></i>
+															Supprimer
+														</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</td>
+
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="6" class="text-center py-4">
+										<i class='bx bx-info-circle bx-md text-muted'></i>
+										<p class="text-muted mt-2">Aucun email trouvé</p>
+										<a href="{{ path('app_email_new') }}" class="btn btn-sm btn-primary">
+											<i class='bx bx-plus'></i>
+											Créer le premier email
+										</a>
+									</td>
+
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

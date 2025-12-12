@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails Marchand
+{% endblock %}
+
+{% block body %}
+	<div class="container-xxl">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center bg-navbar-theme">
+				<h5 class="mb-0">
+					<i class='bx bx-store'></i>
+					Détails du Marchand
+				</h5>
+				<div>
+					<a href="{{ path('app_merchant_index') }}" class="btn btn-secondary me-2">
+						<i class='bx bx-arrow-back'></i>
+						Retour
+					</a>
+					<a href="{{ path('app_merchant_edit', {'id': merchant.id}) }}" class="btn btn-warning">
+						<i class='bx bx-edit'></i>
+						Modifier
+					</a>
+				</div>
+			</div>
+
+			<div class="card-body">
+				<table class="table table-borderless">
+					<tbody>
+						
+						<tr>
+							<th>
+								<i class='bx bx-store me-2'></i>Code</th>
+							<td>{{ merchant.shortcode }}</td>
+						</tr>
+						<tr>
+							<th>
+								<i class='bx bx-code me-2'></i>Référence</th>
+							<td>
+								<code>{{ merchant.code }}</code>
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<i class='bx bx-envelope me-2'></i>Nombre d'Emails</th>
+							<td>
+								<span class="badge bg-label-info">{{ merchant.emails|length }}</span>
+							</td>
+						</tr>
+						
+						
+						<tr>
+							<th>
+								<i class='bx bx-check-circle me-2'></i>Statut</th>
+							<td>
+								{% if merchant.enabled %}
+									<span class="badge bg-success">Activé</span>
+								{% else %}
+									<span class="badge bg-secondary">Désactivé</span>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<i class='bx bx-calendar me-2'></i>Crée le</th>
+							<td>{{ merchant.createdAt ? merchant.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+					</tbody>
+				</table>
+
+				{% if merchant.emails|length > 0 %}
+					<hr>
+					<h6>
+						<i class='bx bx-list-ul me-2'></i>Emails associés</h6>
+					<ul class="list-group">
+						{% for email in merchant.emails %}
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+								<span>
+									<i class='bx bx-envelope me-2'></i>
+									{{ email.value }}</span>
+								<a href="{{ path('app_email_show', {'id': email.id}) }}" class="btn btn-sm btn-primary">
+									<i class='bx bx-show'></i>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+				<div class="mt-4">
+					<button type="button" class="btn btn-danger" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer ce marchand ?')) document.getElementById('delete-form').submit();">
+						<i class='bx bx-trash'></i>
+						Supprimer
+					</button>
+				</div>
+
+				<form id="delete-form" method="post" action="{{ path('app_merchant_delete', {'id': merchant.id}) }}" style="display: none;">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ merchant.id) }}">
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

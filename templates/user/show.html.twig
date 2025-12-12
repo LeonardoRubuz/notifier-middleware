@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails Utilisateur
+{% endblock %}
+
+{% block body %}
+	<div class="container-xxl">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center bg-navbar-theme">
+				<h5 class="mb-0">
+					<i class='bx bx-user'></i>
+					Détails de l'Utilisateur
+				</h5>
+				<div>
+					<a href="{{ path('app_user_index') }}" class="btn btn-secondary me-2">
+						<i class='bx bx-arrow-back'></i>
+						Retour
+					</a>
+					<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">
+						<i class='bx bx-edit'></i>
+						Modifier
+					</a>
+				</div>
+			</div>
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4 text-center mb-4">
+						<div class="avatar avatar-xl mx-auto mb-3">
+							<span class="avatar-initial rounded-circle bg-primary" style="font-size: 2rem; width: 80px; height: 80px; line-height: 80px;">
+								{% if user.prenom %}
+									{{ user.prenom|first|upper }}
+								{% else %}
+									{{ user.username|first|upper }}
+								{% endif %}
+							</span>
+						</div>
+						<h4>
+							{% if user.prenom or user.nom %}
+								{{ user.prenom }}
+								{{ user.nom }}
+							{% else %}
+								{{ user.username }}
+							{% endif %}
+						</h4>
+						<p class="text-muted">{{ user.username }}</p>
+						<div>
+							{% for role in user.roles %}
+								{% if role == 'ROLE_ADMIN' %}
+									<span class="badge bg-danger">Administrateur</span>
+								{% elseif role == 'ROLE_MANAGER' %}
+									<span class="badge bg-warning">Manager</span>
+								{% elseif role == 'ROLE_USER' %}
+									<span class="badge bg-primary">Utilisateur</span>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+					<div class="col-md-8">
+						<table class="table table-borderless">
+							<tbody>
+								<tr>
+									<th width="200">
+										<i class='bx bx-hash me-2'></i>ID
+									</th>
+									<td>
+										<strong>{{ user.id }}</strong>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<i class='bx bx-user me-2'></i>Nom
+									</th>
+									<td>{{ user.nom ?? '-' }}</td>
+								</tr>
+								<tr>
+									<th>
+										<i class='bx bx-user me-2'></i>Prénom
+									</th>
+									<td>{{ user.prenom ?? '-' }}</td>
+								</tr>
+								<tr>
+									<th>
+										<i class='bx bx-at me-2'></i>Nom Utilisateur
+									</th>
+									<td>
+										<code>{{ user.username }}</code>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<i class='bx bx-shield me-2'></i>Rôles
+									</th>
+									<td>
+										{% for role in user.roles %}
+											<span class="badge bg-label-primary me-1">{{ role }}</span>
+										{% endfor %}
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<i class='bx bx-calendar me-2'></i>Date de création
+									</th>
+									<td>{{ user.createdAt ? user.createdAt|date('d/m/Y à H:i') : '-' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

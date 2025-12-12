@@ -22,8 +22,9 @@ class Email
     #[ORM\ManyToOne(inversedBy: 'emails')]
     private ?Merchant $merchant = null;
 
-    public function __construct() {
-        
+    public function __construct()
+    {
+
         $this->code = uniqid();
         $this->createdAt = new \DateTimeImmutable();
     }
@@ -55,5 +56,10 @@ class Email
         $this->merchant = $merchant;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->value ?? '';
     }
 }

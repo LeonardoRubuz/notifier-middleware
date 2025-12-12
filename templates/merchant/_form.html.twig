@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+
+<div class="mb-3">
+	<label for="{{ form.shortcode.vars.id }}" class="form-label">
+		<i class='bx bx-barcode'></i>
+		Code
+		<span class="text-danger">*</span>
+	</label>
+	{{ form_widget(form.shortcode, {
+		'attr': {
+			'class': 'form-control form-control-lg',
+			'placeholder': 'Marchand123'
+		}
+	}) }}
+	<div class="form-text">Entrez un code court unique pour identifier le marchand</div>
+	{{ form_errors(form.shortcode) }}
+</div>
+
+<div class="mb-3">
+	<div class="form-check form-switch">
+		{{ form_widget(form.enabled, {
+			'attr': {'class': 'form-check-input', 'role': 'switch'}
+		}) }}
+		<label class="form-check-label" for="{{ form.enabled.vars.id }}">
+			<i class='bx bx-check-circle'></i>
+			Marchand activé
+		</label>
+	</div>
+	<div class="form-text">Le marchand sera actif et utilisable si cette option est cochée</div>
+	{{ form_errors(form.enabled) }}
+</div>
+
+{{ form_rest(form) }}
+
+<hr class="my-4">
+
+<div class="d-flex justify-content-between align-items-center">
+	<a href="{{ path('app_merchant_index') }}" class="btn btn-outline-secondary">
+		<i class='bx bx-arrow-back'></i>
+		Annuler
+	</a>
+	<button type="submit" class="btn btn-primary btn-lg">
+		<i class='bx bx-save'></i>
+		{{ button_label|default('Enregistrer') }}
+	</button>
+</div>
+
+{{ form_end(form) }}

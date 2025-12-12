@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails Email
+{% endblock %}
+
+{% block body %}
+	<div class="container-xxl">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center bg-navbar-theme">
+				<h5 class="mb-0">
+					<i class='bx bx-envelope'></i>
+					Détails de l'Email
+				</h5>
+				<div>
+					<a href="{{ path('app_email_index') }}" class="btn btn-secondary me-2">
+						<i class='bx bx-arrow-back'></i>
+						Retour
+					</a>
+					<a href="{{ path('app_email_edit', {'id': email.id}) }}" class="btn btn-warning">
+						<i class='bx bx-edit'></i>
+						Modifier
+					</a>
+				</div>
+			</div>
+
+			<div class="card-body">
+				<table class="table table-borderless">
+					<tbody>
+
+						{# <tr>
+													<th>
+														<i class='bx bx-code me-2'></i>Code</th>
+													<td>
+														<code>{{ email.code }}</code>
+													</td>
+												</tr> #}
+						<tr>
+							<th>
+								<i class='bx bx-envelope me-2'></i>Adresse Email</th>
+							<td>{{ email.value }}</td>
+						</tr>
+						<tr>
+							<th>
+								<i class='bx bx-store me-2'></i>Marchand</th>
+							<td>
+								{% if email.merchant %}
+									<span class="badge bg-label-primary">{{ email.merchant.shortcode }}</span>
+								{% else %}
+									<span class="text-muted">Statut</span>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<i class='bx bx-check-circle me-2'></i>Statut</th>
+							<td>
+								{% if email.enabled %}
+									<span class="badge bg-success">Activé</span>
+								{% else %}
+									<span class="badge bg-secondary">Désactivé</span>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<th>
+								<i class='bx bx-calendar me-2'></i>Crée le</th>
+							<td>{{ email.createdAt ? email.createdAt|date('d/m/Y H:i:s') : '' }}</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+				<div class="mt-4">
+					<button type="button" class="btn btn-danger" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cet email ?')) document.getElementById('delete-form').submit();">
+						<i class='bx bx-trash'></i>
+						Supprimer
+					</button>
+				</div>
+
+				<form id="delete-form" method="post" action="{{ path('app_email_delete', {'id': email.id}) }}" style="display: none;">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ email.id) }}">
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

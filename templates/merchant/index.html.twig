@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Marchands
+{% endblock %}
+
+{% block body %}
+	<div class="container-xxl">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center bg-navbar-theme">
+				<h5 class="mb-0">
+					<i class='bx bx-store'></i>
+					Liste des Marchands
+				</h5>
+				<a href="{{ path('app_merchant_new') }}" class="btn btn-primary">
+					<i class='bx bx-plus'></i>
+					Nouveau
+				</a>
+			</div>
+
+			<div class="card-body">
+				<div class="mb-3">
+					<div class="btn-group" role="group">
+						<a href="{{ path('app_merchant_index') }}" class="btn btn-sm {{ currentFilter == 'all' ? 'btn-primary' : 'btn-outline-primary' }}">
+							<i class='bx bx-list-ul'></i>
+							Tous
+						</a>
+						<a href="{{ path('app_merchant_index', {filter: 'enabled'}) }}" class="btn btn-sm {{ currentFilter == 'enabled' ? 'btn-success' : 'btn-outline-success' }}">
+							<i class='bx bx-check-circle'></i>
+							Activés
+						</a>
+						<a href="{{ path('app_merchant_index', {filter: 'disabled'}) }}" class="btn btn-sm {{ currentFilter == 'disabled' ? 'btn-secondary' : 'btn-outline-secondary' }}">
+							<i class='bx bx-x-circle'></i>
+							Désactivés
+						</a>
+					</div>
+				</div>
+				<div class="table-responsive text-nowrap">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Code</th>
+								<th>Nombre d'Emails</th>
+								<th>Statut</th>
+								<th>Date de création</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody class="table-border-bottom-0">
+							{% for merchant in merchants %}
+								<tr>
+									<td>
+										<strong>{{ loop.index }}</strong>
+									</td>
+									<td>
+
+										{{ merchant.shortcode }}
+									</td>
+									<td>
+										<span class="badge bg-label-info">{{ merchant.emails|length }}</span>
+									</td>
+									<td>
+										{% if merchant.enabled %}
+											<span class="badge bg-success">Activé</span>
+										{% else %}
+											<span class="badge bg-secondary">Désactivé</span>
+										{% endif %}
+									</td>
+									<td>
+										<small class="text-muted">{{ merchant.createdAt ? merchant.createdAt|date('d/m/y') : '' }}</small>
+									</td>
+									<td>
+										<div class="d-flex gap-1">
+											<div class="dropdown">
+												<button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+													<i class="bx bx-dots-vertical-rounded"></i>
+												</button>
+												<div class="dropdown-menu">
+													<a href="{{ path('app_merchant_show', {'id': merchant.id}) }}" class="dropdown-item">
+														<i class="ti ti-building-store me-1"></i>Voir
+													</a>
+													<a href="{{ path('app_merchant_edit', {'id': merchant.id}) }}" class="dropdown-item">
+														<i class="ti ti-pencil me-1"></i>
+														Modifier
+													</a>
+													<form method="post" action="{{ path('app_merchant_delete', {'id': merchant.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce Marchand ?');">
+														<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ merchant.id) }}">
+														<button type="submit" class="dropdown-item text-danger">
+															<i class="ti ti-trash"></i>
+															Supprimer
+														</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="6" class="text-center py-4">
+										<i class='bx bx-info-circle bx-md text-muted'></i>
+										<p class="text-muted mt-2">Aucun marchand trouvé</p>
+										<a href="{{ path('app_merchant_new') }}" class="btn btn-sm btn-primary">
+											<i class='bx bx-plus'></i>
+											Créer le premier marchand
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

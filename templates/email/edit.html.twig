@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Email
+{% endblock %}
+
+{% block body %}
+	<div class="container-xxl">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center bg-navbar-theme">
+				<h5 class="mb-0">
+					<i class='bx bx-edit'></i>
+					Modifier Email
+				</h5>
+				<a href="{{ path('app_email_index') }}" class="btn btn-secondary">
+					<i class='bx bx-arrow-back'></i>
+					Retour à la liste
+				</a>
+			</div>
+
+			<div class="card-body">
+				{{ form_start(form) }}
+				<div class="row">
+					<div class="col-md-12 mb-3">
+						<label class="form-label">Adresse Email</label>
+						{{ form_widget(form.value, {
+							'attr': {'class': 'form-control', 'placeholder': 'exemple@email.com'}
+						}) }}
+						{{ form_errors(form.value) }}
+					</div>
+					<div class="col-md-12 mb-3">
+						<label class="form-label">Marchand</label>
+						{{ form_widget(form.merchant, {
+							'attr': {'class': 'form-select'}
+						}) }}
+						{{ form_errors(form.merchant) }}
+					</div>
+					<div class="col-md-12 mb-3">
+						<div class="form-check form-switch">
+							{{ form_widget(form.enabled, {
+							'attr': {'class': 'form-check-input', 'role': 'switch'}
+						}) }}
+							<label class="form-check-label" for="{{ form.enabled.vars.id }}">
+								<i class='bx bx-check-circle'></i>
+								Statut
+							</label>
+						</div>
+						{{ form_errors(form.enabled) }}
+					</div>
+				</div>
+				<div class="d-flex justify-content-between mt-4">
+					<button type="submit" class="btn btn-primary">
+						<i class='bx bx-save'></i>
+						Mettre à jour
+					</button>
+
+					<button type="button" class="btn btn-danger" onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cet email ?')) document.getElementById('delete-form').submit();">
+						<i class='bx bx-trash'></i>
+						Supprimer
+					</button>
+				</div>
+				{{ form_end(form) }}
+
+				<form id="delete-form" method="post" action="{{ path('app_email_delete', {'id': email.id}) }}" style="display: none;">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ email.id) }}">
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

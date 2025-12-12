@@ -1,14 +1,22 @@
-<?php 
+<?php
 
 namespace App\Entity\Traits;
 
 use DateTimeImmutable;
+use Doctrine\ORM\Mapping as ORM;
 
-trait EntityTrait 
+trait EntityTrait
 {
+    #[ORM\Column(length: 50)]
     private string $code;
+
+    #[ORM\Column]
     private bool $enabled = true;
+
+    #[ORM\Column]
     private bool $deleted = false;
+
+    #[ORM\Column]
     private DateTimeImmutable $createdAt;
 
     public function getCode(): string

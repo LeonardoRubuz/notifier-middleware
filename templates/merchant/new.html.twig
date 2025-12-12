@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Marchand
+{% endblock %}
+
+{% block body %}
+	<div class="row mt-4">
+		<div class="col-md-8 mx-auto">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h5 class="mb-0">
+						<i class='bx bx-store-alt'></i>
+						Créer un nouveau marchand
+					</h5>
+					<a href="{{ path('app_merchant_index') }}" class="btn btn-sm btn-secondary">
+						<i class='bx bx-arrow-back'></i>
+						Retour
+					</a>
+				</div>
+				<div class="card-body">
+					{{ include('merchant/_form.html.twig') }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
