@@ -10,13 +10,16 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="app-brand justify-content-center mb-4">
-							<a href="#" class="app-brand-link gap-2">
-								<span class="app-brand-text demo text-body fw-bolder">Flex-Roll</span>
+							<a href="#" class="app-brand-link gap-2 d-flex align-items-center">
+								<img src="{{ asset('assets/img/logo-flexpaie.png') }}" alt="FlexPaie Logo" style="height: 80px; margin-right: 20px;">
+								<h1
+									class="mb-0">{# <span class="text-center demo text-body fw-bolder">FlexPaie</span> #}
+								</h1>
 							</a>
 						</div>
 
-						<h4 class="mb-2">Créer un compte 🚀</h4>
-						<p class="mb-4">Inscrivez-vous pour commencer</p>
+						<h4 class="mb-0 justify-content-center d-flex">Créer un compte</h4>
+						<p class="justify-content-center d-flex ">Inscrivez-vous pour commencer</p>
 
 						{% for flash_message in app.flashes('success') %}
 							<div class="alert alert-success" role="alert">
@@ -81,4 +84,5 @@
 			</div>
 		</div>
 	</div>
+	
 {% endblock %}

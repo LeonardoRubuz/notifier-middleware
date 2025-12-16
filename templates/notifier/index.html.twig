@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Notification des Échecs
+{% endblock %}
+
+{% block body %}
+
+	<div class="container py-5">
+		<h2 class="fw-bold mb-1">Préparer une notification</h2>
+		{# <p class="text-muted mb-4">Remplissez les informations ci-dessous pour configurer votre nouvelle campagne.</p> #}
+		<form>
+			<div class="container card-body p-4">
+
+				<div class="row mt-4">
+
+					<div class="col-md-5">
+						<label class="form-label fw-semibold">Sélectionner un Marchand</label>
+						<select class="form-select" name="merchant" required>
+							<option value="">-- Choisir un Marchand --</option>
+							{% for merchant in merchants %}
+								<option value="{{ merchant.id }}">{{ merchant.shortcode }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-md-5">
+						<label class="form-label fw-semibold">Date d'exécution</label>
+						<input type="date" class="form-control" value="2024-10-26">
+					</div>
+				</div>
+
+				<div class="row mt-4">
+					<div class="col-md-5">
+						<label class="form-label fw-semibold">Nom de la Liste</label>
+						<input type="text" class="form-control" placeholder="Entrer le nom de la liste">
+					</div>
+					<div class="col-md-5">
+						<label class="form-label fw-semibold">Nombre</label>
+						<input type="text" class="form-control" placeholder="Entrer le nombre total d'échecs">
+					</div>
+				</div>
+
+				<div class="row mt-3" id="numbers-list">
+					<div class="row mb-2 align-items-center number-row">
+						<div class="col-md-5">
+							<label class="form-label fw-semibold">Numéro</label>
+							<div class="input-group ">
+								<span class="input-group-text">+(243)</span>
+								<input type="text" class="form-control" name="numero[]" placeholder="Numéro de téléphone">
+							</div>
+						</div>
+						<div class="col-md-5">
+							<label class="form-label fw-semibold">Raison de l'échec de l'opération</label>
+							<input type="text" class="form-control" name="raison[]" placeholder="Raison de l'échec">
+						</div>
+						<!-- Pas de bouton suppression sur la première ligne -->
+
+					</div>
+				</div>
+
+				<div class="row mb-4">
+					<div class="col-md-9">
+						<button type="button" class="btn btn-outline-primary btn-sm" id="addRowBtn">
+							<i class="bx bx-plus-circle"></i>
+							Ajouter
+						</button>
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button type="submit" class="btn btn-secondary btn-lg">Envoyer</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	{% block stylesheets %}
+		{{ parent() }}
+		<link rel="stylesheet" href="/assets/notifier-form.css">
+	{% endblock %}
+
+	{% block javascripts %}
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const numbersList = document.getElementById('numbers-list');
+const addRowBtn = document.getElementById('addRowBtn');
+
+addRowBtn.addEventListener('click', function () {
+const row = document.createElement('div');
+row.className = 'row mb-2 align-items-center number-row';
+row.innerHTML = `
+						<div class="col-md-5 mt-2">
+							<div class="input-group">
+								<span class="input-group-text">+(243)</span>
+								<input type="text" class="form-control" name="numero[]" placeholder="Numéro de téléphone" required>
+							</div>
+						</div>
+						<div class="col-md-5 mt-2">
+							<input type="text" class="form-control" name="raison[]" placeholder="Raison de l'échec" required>
+						</div>
+						<div class="col-md-1">
+							<button type="button" class="btn btn-link text-danger btn-remove-row" title="Supprimer">
+								<i class="bx bx-trash"></i>
+							</button>
+						</div>
+					`;
+numbersList.appendChild(row);
+});
+
+numbersList.addEventListener('click', function (e) {
+if (e.target.closest('.btn-remove-row')) {
+const row = e.target.closest('.number-row');
+if (row) 
+row.remove();
+
+
+
+}
+});
+});
+		</script>
+	{% endblock %}
+
+	{# Suppression du <script> JS inline, il est maintenant importé #}
+{% endblock %}
