@@ -81,6 +81,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "compile": [
+            "@auto-scripts"
         ]
     },
     "conflict": {
