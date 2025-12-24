@@ -8,7 +8,7 @@
 	<div class="container py-5">
 		<h2 class="fw-bold mb-1">Préparer une notification</h2>
 		{# <p class="text-muted mb-4">Remplissez les informations ci-dessous pour configurer votre nouvelle campagne.</p> #}
-		<form>
+		<form method="post" action="{{ path('app_notifier_envoyer') }}">
 			<div class="container card-body p-4">
 
 				<div class="row mt-4">
@@ -18,24 +18,24 @@
 						<select class="form-select" name="merchant" required>
 							<option value="">-- Choisir un Marchand --</option>
 							{% for merchant in merchants %}
-								<option value="{{ merchant.id }}">{{ merchant.shortcode }}</option>
+								<option value="{{ merchant.id|upper }}">{{ merchant.shortcode|upper }}</option>
 							{% endfor %}
 						</select>
 					</div>
 					<div class="col-md-5">
 						<label class="form-label fw-semibold">Date d'exécution</label>
-						<input type="date" class="form-control" value="2024-10-26">
+						<input type="date" class="form-control" name="executionDate" value="{{ "now"|date('Y-m-d') }}">
 					</div>
 				</div>
 
 				<div class="row mt-4">
 					<div class="col-md-5">
 						<label class="form-label fw-semibold">Nom de la Liste</label>
-						<input type="text" class="form-control" placeholder="Entrer le nom de la liste">
+						<input type="text" class="form-control" name="listName" placeholder="Entrer le nom de la liste" required>
 					</div>
 					<div class="col-md-5">
 						<label class="form-label fw-semibold">Nombre</label>
-						<input type="text" class="form-control" placeholder="Entrer le nombre total d'échecs">
+						<input type="number" class="form-control" name="totalParticipants" placeholder="Entrer le nombre total d'échecs" required>
 					</div>
 				</div>
 
@@ -45,12 +45,12 @@
 							<label class="form-label fw-semibold">Numéro</label>
 							<div class="input-group ">
 								<span class="input-group-text">+(243)</span>
-								<input type="text" class="form-control" name="numero[]" placeholder="Numéro de téléphone">
+								<input type="text" class="form-control" name="phoneNumber[]" placeholder="Numéro de téléphone">
 							</div>
 						</div>
 						<div class="col-md-5">
 							<label class="form-label fw-semibold">Raison de l'échec de l'opération</label>
-							<input type="text" class="form-control" name="raison[]" placeholder="Raison de l'échec">
+							<input type="text" class="form-control" name="reason[]" placeholder="Raison de l'échec">
 						</div>
 						<!-- Pas de bouton suppression sur la première ligne -->
 
@@ -91,11 +91,11 @@ row.innerHTML = `
 						<div class="col-md-5 mt-2">
 							<div class="input-group">
 								<span class="input-group-text">+(243)</span>
-								<input type="text" class="form-control" name="numero[]" placeholder="Numéro de téléphone" required>
+								<input type="text" class="form-control" name="phoneNumber[]" placeholder="Numéro de téléphone" required>
 							</div>
 						</div>
 						<div class="col-md-5 mt-2">
-							<input type="text" class="form-control" name="raison[]" placeholder="Raison de l'échec" required>
+							<input type="text" class="form-control" name="reason[]" placeholder="Raison de l'échec" required>
 						</div>
 						<div class="col-md-1">
 							<button type="button" class="btn btn-link text-danger btn-remove-row" title="Supprimer">
