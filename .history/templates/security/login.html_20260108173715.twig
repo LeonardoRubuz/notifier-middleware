@@ -9,8 +9,16 @@
 			<div class="authentication-inner">
 				<div class="card">
 					<div class="card-body">
+						{# <div class="app-brand justify-content-center mb-4">
+							<a href="#" class="app-brand-link gap-2 d-flex align-items-center">
+								<img src="{{ asset('assets/img/logo-flexpaie.png') }}" alt="FlexPaie Logo" style="height: 80px; margin-right: 20px;">
+								<h1
+									class="mb-0">{# <span class="text-center demo text-body fw-bolder">FlexPaie</span> #}
+								{</h1> #}
+							</a>
+						</div> #}
 
-						<h4 class="mb-2 text-center">Plate-forme de Notification d'Echec Flex-Roll</h4>
+						<h4 class="mb-2 text-center">Bienvenue sur notre Plate-forme</h4>
 						<p class="mb-4 text-center">Connectez-vous à votre compte</p>
 
 						{% if error %}
@@ -22,7 +30,7 @@
 						<form method="post" action="{{ path('app_login') }}">
 							<div class="mb-3">
 								<label for="username" class="form-label">Nom d'utilisateur</label>
-								<input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="exemple: john.jk@gmail.com " autofocus required>
+								<input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Ex: john.jk@gmail.com " autofocus required>
 							</div>
 							<div class="mb-3 form-password-toggle">
 								<label class="form-label" for="password">Mot de Passe</label>
@@ -42,12 +50,12 @@
 							</div>
 						</form>
 
-						{# <p class="text-center">
-													<span>Vous n'avez pas de compte ?</span>
-													<a href="{{ path('app_register') }}">
-														<span>Inscrivez-vous</span>
-													</a>
-												</p> #}
+						<p class="text-center">
+							<span>Vous n'avez pas de compte ?</span>
+							<a href="{{ path('app_register') }}">
+								<span>Inscrivez-vous</span>
+							</a>
+						</p>
 					</div>
 				</div>
 			</div>

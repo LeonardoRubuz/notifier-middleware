@@ -19,8 +19,8 @@ class AppFixtures extends Fixture
         // Créer un administrateur par défaut
         $admin = new User();
         $admin->setUsername('admin');
-        $admin->setNom('John');
-        $admin->setPrenom('JK');
+        $admin->setNom('Administrateur');
+        $admin->setPrenom('Super');
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin123'));
         $manager->persist($admin);

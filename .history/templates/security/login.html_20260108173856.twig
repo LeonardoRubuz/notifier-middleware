@@ -10,7 +10,7 @@
 				<div class="card">
 					<div class="card-body">
 
-						<h4 class="mb-2 text-center">Plate-forme de Notification d'Echec Flex-Roll</h4>
+						<h4 class="mb-2 text-center">Plate-forme de Notification Flex-Roll</h4>
 						<p class="mb-4 text-center">Connectez-vous à votre compte</p>
 
 						{% if error %}
@@ -22,7 +22,7 @@
 						<form method="post" action="{{ path('app_login') }}">
 							<div class="mb-3">
 								<label for="username" class="form-label">Nom d'utilisateur</label>
-								<input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="exemple: john.jk@gmail.com " autofocus required>
+								<input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Ex: john.jk@gmail.com " autofocus required>
 							</div>
 							<div class="mb-3 form-password-toggle">
 								<label class="form-label" for="password">Mot de Passe</label>
@@ -42,12 +42,12 @@
 							</div>
 						</form>
 
-						{# <p class="text-center">
-													<span>Vous n'avez pas de compte ?</span>
-													<a href="{{ path('app_register') }}">
-														<span>Inscrivez-vous</span>
-													</a>
-												</p> #}
+						<p class="text-center">
+							<span>Vous n'avez pas de compte ?</span>
+							<a href="{{ path('app_register') }}">
+								<span>Inscrivez-vous</span>
+							</a>
+						</p>
 					</div>
 				</div>
 			</div>
