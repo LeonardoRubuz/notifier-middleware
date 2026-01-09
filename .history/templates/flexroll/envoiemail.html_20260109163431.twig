@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Confirmation d'email - FlexRoll</title>
+		<link rel="stylesheet" href="{{ absolute_url(asset('assets/css/email.css')) }}">
+	</head>
+	<body>
+		<div class="container">
+		<div class="card">
+				<h1>🔐 FlexRoll</h1>
+				<p>Confirmation de votre adresse email</p>
+			<div class="header confirm-email">
+				<h3>Plateforme de Notification d'échec FlexRoll</h3>
+			</div>
+
+			<div class="content">
+				<p>Bonjour	
+					<strong>{{ prenom }}
+						{{ nom }}</strong>,</p>
+
+				<div class="card-body">
+				<div class="info-box">
+					<strong>📌 Vos identifiants de connexion :</strong>
+					<ul style="margin: 10px 0;">
+						<li>
+							<strong>Email :</strong>
+							{{ username }}
+							</li>
+						<li>
+							<strong>Mot de passe :</strong>
+							{{ password }}</li>
+						<li>Vous pourrez changer votre mot de passe après la première connexion</li>
+					</ul>
+				</div> 
+				</div>
+			</div>
+
+			<div class="footer">
+				<p>©
+					{{ "now"|date("Y") }}
+					FlexRoll - Tous droits réservés</p>
+				<p>Cet email a été envoyé depuis
+					<a href="mailto:payroll@flexpaie.com">payroll@flexpaie.com</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Confirmation d'email - FlexRoll</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				line-height: 1.6;
+				color: #333;
+				max-width: 600px;
+				margin: 0 auto;
+				padding: 20px;
+				background-color: #f4f4f4;
+			}
+			.container {
+				background: white;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+			.header {
+				text-align: center;
+				border-bottom: 3px solid #007bff;
+				padding-bottom: 20px;
+				margin-bottom: 30px;
+			}
+			.header h1 {
+				color: #007bff;
+				margin: 0;
+			}
+			.content {
+				margin-bottom: 30px;
+			}
+			.btn {
+				display: inline-block;
+				padding: 12px 30px;
+				background-color: #007bff;
+				color: white;
+				text-decoration: none;
+				border-radius: 5px;
+				font-weight: bold;
+				text-align: center;
+			}
+			.btn:hover {
+				background-color: #0056b3;
+			}
+			.footer {
+				text-align: center;
+				margin-top: 30px;
+				padding-top: 20px;
+				border-top: 1px solid #ddd;
+				font-size: 12px;
+				color: #666;
+			}
+			.link-copy {
+				background: #f8f9fa;
+				padding: 15px;
+				border-radius: 5px;
+				margin-top: 20px;
+				word-break: break-all;
+				font-size: 12px;
+				color: #666;
+			}
+			.password-box {
+				background: #f8f9fa;
+				border: 2px solid #28a745;
+				padding: 20px;
+				border-radius: 8px;
+				text-align: center;
+				margin: 25px 0;
+			}
+			.password-box .password {
+				font-size: 24px;
+				font-weight: bold;
+				color: #28a745;
+				font-family: 'Courier New', monospace;
+				letter-spacing: 2px;
+				margin: 10px 0;
+			}
+			.info-box {
+				background: #fff3cd;
+				border-left: 4px solid #ffc107;
+				padding: 15px;
+				margin: 20px 0;
+				border-radius: 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1>🔐 FlexRoll</h1>
+				<p>Confirmation de votre adresse email</p>
+			</div>
+
+			<div class="content">
+				<p>Bonjour
+					<strong>{{ prenom }}
+						{{ nom }}</strong>,</p>
+
+				<p>Bienvenue sur la plateforme FlexRoll ! 🎉</p>
+
+				<p>Votre compte a été pré-enregistré avec succès. Pour finaliser la création, veuillez confirmer votre adresse email.</p>
+
+				<div class="password-box">
+					<p style="margin: 0; font-size: 14px; color: #666;">🔑 Votre mot de passe :</p>
+					<div class="password">{{ password }}</div>
+					<p style="margin: 10px 0 0 0; font-size: 12px; color: #666;">
+						💡 Conservez ce mot de passe précieusement
+					</p>
+				</div>
+
+				<p style="text-align: center; margin: 30px 0;">
+					<a href="{{ url('app_user_confirm_email', {'token': token}) }}" class="btn">
+						✅ Confirmer mon email et activer mon compte
+					</a>
+				</p>
+
+				<div class="info-box">
+					<strong>📌 Vos identifiants de connexion :</strong>
+					<ul style="margin: 10px 0;">
+						<li>
+							<strong>Email :</strong>
+							{{ prenom|lower }}.{{ username|lower }}@votredomaine.com</li>
+						<li>
+							<strong>Mot de passe :</strong>
+							{{ password }}</li>
+						<li>Vous pourrez changer votre mot de passe après la première connexion</li>
+					</ul>
+				</div>
+
+				<div class="link-copy">
+					<strong>Ou copiez ce lien dans votre navigateur :</strong><br>
+					{{ url('app_user_confirm_email', {'token': token}) }}
+				</div>
+
+				<p style="color: #dc3545; margin-top: 20px;">
+					⚠️
+					<strong>Important :</strong>
+					Votre compte ne sera créé dans notre système qu'après avoir cliqué sur le bouton de confirmation. Ce lien est unique et expire après utilisation.
+				</p>
+
+				<p style="font-size: 12px; color: #666; margin-top: 20px;">
+					Si vous n'avez pas demandé la création de ce compte, ignorez simplement cet email.
+				</p>
+			</div>
+
+			<div class="footer">
+				<p>©
+					{{ "now"|date("Y") }}
+					FlexRoll - Tous droits réservés</p>
+				<p>Cet email a été envoyé depuis
+					<a href="mailto:payroll@flexpaie.com">payroll@flexpaie.com</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

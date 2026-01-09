@@ -1,0 +1,205 @@
+/* ===================================
+   FlexRoll - Email Templates Styles
+   =================================== */
+
+/* Base Email Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    margin-bottom: 30px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+/* Header Variants */
+.header.confirm-email {
+    border-bottom: 3px solid #007bff;
+}
+
+.header.confirm-email h1 {
+    color: #007bff;
+}
+
+.header.password {
+    border-bottom: 3px solid #28a745;
+}
+
+.header.password h1 {
+    color: #28a745;
+}
+
+.header.reset-password {
+    border-bottom: 3px solid #ffc107;
+}
+
+.header.reset-password h1 {
+    color: #ffc107;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn.btn-warning {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.btn.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Password Box Styles */
+.password-box {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 25px 0;
+}
+
+.password-box.success {
+    background: #f8f9fa;
+    border: 2px solid #28a745;
+}
+
+.password-box.success .password {
+    color: #28a745;
+}
+
+.password-box.warning {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+}
+
+.password-box.warning .password {
+    color: #856404;
+}
+
+.password-box .password {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    margin: 10px 0;
+}
+
+/* Info Boxes */
+.link-copy {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    word-break: break-all;
+    font-size: 12px;
+    color: #666;
+}
+
+.warning-box {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.warning-box.danger {
+    background: #f8d7da;
+    border-left-color: #dc3545;
+    color: #721c24;
+}
+
+.info-box {
+    background: #d1ecf1;
+    border-left: 4px solid #0dcaf0;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+    color: #055160;
+}
+
+.security-tips {
+    background: #e7f3ff;
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.security-tips ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    .password-box .password {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+}

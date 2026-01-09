@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>-Envoi Identifiant- FlexRoll</title>
+		<link rel="stylesheet" href="{{ absolute_url(asset('assets/css/email.css')) }}">
+	</head>
+	<body>
+		<div class="container">
+			<div class="card">
+			
+				<p>Bonjour
+					<strong>{{ prenom }}
+						{{ nom }}</strong>,</p>
+
+				<div class="card-body">
+				<P>Nous sommes une plateforme de notification dechec</P>
+					<div class="info-box">
+						<strong>📌 Vos identifiants de connexion :</strong>
+						<ul style="margin: 10px 0;">
+							<li>
+								<strong>Email :</strong>
+								{{ username }}
+							</li>
+							<li>
+								<strong>Mot de passe :</strong>
+								{{ password }}</li>
+						</ul>
+					</div>
+					<p>
+						NB: En cas de problème avec votre mot de passe, 
+					veuillez contacter l’administrateur pour demander sa réinitialisation.
+					</p>
+				</div>
+				<p>©
+					{{ "now"|date("Y") }}
+					FlexRoll - Tous droits réservés</p>
+				<p>Cet email a été envoyé depuis
+					<a href="mailto:payroll@flexpaie.com">payroll@flexpaie.com</a>
+				</p>
+			</div>
+
+
+		</div>
+	</body>
+</html>

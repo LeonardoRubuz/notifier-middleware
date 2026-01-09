@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation d'email - FlexRoll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #666;
+        }
+        .link-copy {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            word-break: break-all;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 FlexRoll</h1>
+            <p>Confirmation de votre adresse email</p>
+        </div>
+
+        <div class="content">
+            <p>Bonjour <strong>{{ prenom }} {{ nom }}</strong>,</p>
+
+            <p>Bienvenue sur la plateforme FlexRoll ! 🎉</p>
+
+            <p>Pour finaliser la création de votre compte, veuillez confirmer votre adresse email en cliquant sur le bouton ci-dessous :</p>
+
+            <p style="text-align: center; margin: 30px 0;">
+                <a href="{{ url('app_user_app_confirm_email', {'token': token}) }}" class="btn">
+                    ✅ Confirmer mon email
+                </a>
+            </p>
+
+            <p>Une fois votre email confirmé, votre mot de passe sera automatiquement généré et vous sera envoyé par email.</p>
+
+            <div class="link-copy">
+                <strong>Ou copiez ce lien dans votre navigateur :</strong><br>
+                {{ url('app_user_app_confirm_email', {'token': token}) }}
+            </div>
+
+            <p style="color: #dc3545; margin-top: 20px;">
+                ⚠️ <strong>Important :</strong> Ce lien est unique et expire après utilisation. Si vous n'avez pas demandé la création de ce compte, ignorez simplement cet email.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>© {{ "now"|date("Y") }} FlexRoll - Tous droits réservés</p>
+            <p>Cet email a été envoyé depuis <a href="mailto:payroll@flexpaie.com">payroll@flexpaie.com</a></p>
+        </div>
+    </div>
+</body>
+</html>
